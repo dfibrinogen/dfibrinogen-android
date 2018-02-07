@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply from: '../config/git-version.gradle'
 
 android {
 
@@ -8,10 +9,10 @@ android {
         applicationId "com.dafian.android.dfibrinogen"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "0.1.0"
+        versionCode gitVersionCode
+        versionName gitVersionName
 
-        archivesBaseName = "DFibrinogen-v0.1.0"
+        archivesBaseName = "DFibrinogen-${gitVersionName}"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
