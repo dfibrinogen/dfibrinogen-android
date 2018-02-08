@@ -150,7 +150,14 @@ dependencies {
         exclude group: 'com.android.support', module: 'design'
     }
 
-    testImplementation 'junit:junit:4.12'
+    testImplementation "org.hamcrest:hamcrest-core:$rootProject.ext.hamcrestVersion"
+    testImplementation ("junit:junit:$rootProject.ext.junitVersion") {
+        exclude group: 'org.hamcrest', module: 'hamcrest-core'
+    }
+    testImplementation ("org.mockito:mockito-core:$rootProject.ext.mockitoVersion") {
+        exclude group: 'org.hamcrest', module: 'hamcrest-core'
+    }
+
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 }

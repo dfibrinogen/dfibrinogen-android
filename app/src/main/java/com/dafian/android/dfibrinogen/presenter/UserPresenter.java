@@ -5,7 +5,7 @@ import com.dafian.android.dfibrinogen.presenter.base.BasePresenter;
 import com.dafian.android.dfibrinogen.ui.view.user.UserView;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -14,12 +14,13 @@ import io.reactivex.schedulers.Schedulers;
 
 public class UserPresenter extends BasePresenter<UserView> {
 
-    private Disposable disposable;
+    private CompositeDisposable disposable;
 
     private DataManager manager;
 
     public UserPresenter(DataManager manager) {
         this.manager = manager;
+        this.disposable = new CompositeDisposable();
     }
 
     @Override
@@ -35,9 +36,7 @@ public class UserPresenter extends BasePresenter<UserView> {
 
     public void getUserAll() {
 
-        if (disposable != null) disposable.dispose();
-
-        disposable = manager.getUserProfileAll()
+        disposable.add(manager.getUserProfileAll()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(userProfileList -> {
@@ -48,6 +47,6 @@ public class UserPresenter extends BasePresenter<UserView> {
                     if (isViewAttached()) {
                         getView().showErrorMessage(throwable.getMessage());
                     }
-                });
+                }));
     }
 }

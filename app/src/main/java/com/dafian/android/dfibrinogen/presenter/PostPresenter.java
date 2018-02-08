@@ -5,7 +5,7 @@ import com.dafian.android.dfibrinogen.presenter.base.BasePresenter;
 import com.dafian.android.dfibrinogen.ui.view.forum.ForumPostView;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -14,12 +14,13 @@ import io.reactivex.schedulers.Schedulers;
 
 public class PostPresenter extends BasePresenter<ForumPostView> {
 
-    private Disposable disposable;
+    private CompositeDisposable disposable;
 
     private DataManager manager;
 
     public PostPresenter(DataManager manager) {
         this.manager = manager;
+        this.disposable = new CompositeDisposable();
     }
 
     @Override
@@ -37,7 +38,7 @@ public class PostPresenter extends BasePresenter<ForumPostView> {
 
         if (disposable != null) disposable.dispose();
 
-        disposable = manager.getForumPostAll()
+        disposable.add(manager.getForumPostAll()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(forumPostList -> {
@@ -48,6 +49,6 @@ public class PostPresenter extends BasePresenter<ForumPostView> {
                     if (isViewAttached()) {
                         getView().showErrorMessage(throwable.getMessage());
                     }
-                });
+                }));
     }
 }
