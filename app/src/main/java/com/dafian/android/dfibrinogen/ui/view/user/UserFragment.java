@@ -1,8 +1,9 @@
-package com.dafian.android.dfibrinogen.ui.view.home;
+package com.dafian.android.dfibrinogen.ui.view.user;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -18,22 +19,24 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
- * @author Dafian on 2/7/18
+ * @author Dafian on 2/8/18
  */
 
-public class HomeFragment extends BaseFragment {
+public class UserFragment extends BaseFragment {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @BindView(R.id.rv_home)
-    RecyclerView rvHome;
-    @BindView(R.id.sw_home)
-    SwipeRefreshLayout swHome;
+    @BindView(R.id.rv_user)
+    RecyclerView rvUser;
+    @BindView(R.id.sw_user)
+    SwipeRefreshLayout swUser;
+    @BindView(R.id.fab_add)
+    FloatingActionButton fabAdd;
 
     private Unbinder unbinder;
 
-    public static HomeFragment newInstance() {
-        HomeFragment fragment = new HomeFragment();
+    public static UserFragment newInstance() {
+        UserFragment fragment = new UserFragment();
         Bundle bundle = new Bundle();
         fragment.setArguments(bundle);
         return fragment;
@@ -48,7 +51,7 @@ public class HomeFragment extends BaseFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_user, container, false);
         unbinder = ButterKnife.bind(this, view);
 
         initView();
@@ -69,7 +72,7 @@ public class HomeFragment extends BaseFragment {
 
     private void initView() {
 
-        toolbar.setTitle(R.string.main_title_home);
+        toolbar.setTitle(R.string.main_title_friend);
         initToolbarNav(toolbar, true);
     }
 }

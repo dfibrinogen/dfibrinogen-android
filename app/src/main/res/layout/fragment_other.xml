@@ -5,22 +5,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    android:orientation="vertical">
 
     <include layout="@layout/default_toolbar" />
 
     <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/sw_home"
+        android:id="@+id/sw_other"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/backgroundOuter"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_home"
+            android:id="@+id/rv_other"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@layout/row_forum_post" />
+            tools:listitem="@layout/row_user" />
 
     </android.support.v4.widget.SwipeRefreshLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_add"
+        android:layout_width="@dimen/image_camera_size"
+        android:layout_height="@dimen/image_camera_size"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:scaleType="center"
+        android:src="@drawable/ic_add"/>
 
 </android.support.design.widget.CoordinatorLayout>
